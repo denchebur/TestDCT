@@ -1,0 +1,28 @@
+﻿<Page x:Class="TestDCT.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestDCT"
+      xmlns:viewModel="clr-namespace:TestDCT.ViewModels"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="MainPage" Height="326"
+      >
+
+
+    <ListView Margin="10,65,437,23" Name="assetsList" ItemsSource="{Binding Assets}">
+        <ListView.DataContext>
+            <viewModel:AssetViewModel/>
+        </ListView.DataContext>
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Width="auto" Header="Price USD" DisplayMemberBinding="{Binding priceUsd}"/>
+                <GridViewColumn Width="auto" Header="Asset name" DisplayMemberBinding="{Binding name}"/>
+                <GridViewColumn Width="35" Header="Rank" DisplayMemberBinding="{Binding rank}"/>
+            </GridView>
+        </ListView.View>
+    </ListView>
+
+
+
+</Page>
