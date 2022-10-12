@@ -19,7 +19,7 @@ namespace TestDCT.Models
         public string marketCapUsd { get; set; }
         public string volumeUsd24Hr { get; set; }
         public string priceUsd { get; set; }
-        public string changePersent24Hr { get; set; }
+        public string changePercent24Hr { get; set; }
         public string vwap24Hr { get; set; }
         public string explorer { get; set; }
 

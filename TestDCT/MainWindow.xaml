@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestDCT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="526" Width="824">
     <Canvas>
-        <TabControl x:Name="tabControl" Height="434" Width="800">
+        <TabControl x:Name="tabControl" Height="510" Width="824" HorizontalAlignment="Center" VerticalAlignment="Top">
             <TabItem Header="Main Page">
-                <Frame x:Name="frame1" Source="MainPage.xaml" Margin="0,0,11,13"/>
+                <Frame x:Name="frame1" Source="MainPage.xaml" Margin="0,0,0,-1"/>
             </TabItem>
-            <TabItem Header="TabItem">
-                <Frame x:Name="frame2" Source=""/>
+            <TabItem Header="Info">
+                <Frame x:Name="frame2" Source="DetailInfoPage.xaml" Margin="0,0,0,1"/>
             </TabItem>
-            
+
         </TabControl>
     </Canvas>
 

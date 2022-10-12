@@ -17,15 +17,61 @@ using System.Windows;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using TestDCT.Extentions;
+using TestDCT.Command;
 
 namespace TestDCT.ViewModels
 {
     public class AssetViewModel : INotifyPropertyChanged
     {
-
-        private const string path = "https://api.coincap.io/v2/assets";
-        private IEnumerable<Asset> assets = new List<Asset>();
+       
+        private IEnumerable<Asset> assets;      
         private Asset selectedAsset;
+        private IEnumerable<Market> markets;
+        private IEnumerable<Exchange> exchanges;
+        private Exchange selectedExchange;
+
+
+        private RelayCommand selectMarketCommand;
+        private RelayCommand selectAssetCommand;
+        private RelayCommand searchCommand;
+
+
+        public AssetViewModel()
+        {
+            LoadAssets();
+        }
+
+        public RelayCommand SelectMarketCommand
+        {
+            get
+            {
+                return selectMarketCommand ??
+                    (selectMarketCommand = new RelayCommand(o => SelectedExchange = GetExchangeById((string)o).Result));
+            }
+            
+        }
+
+        public RelayCommand SearchCommand
+        {
+            get
+            {                                
+                return searchCommand ??
+                    (searchCommand = new RelayCommand(o => Assets = SearchAssets((string)o).Result));
+            }
+        }
+
+        public RelayCommand SelectAssetCommand
+        {
+            get
+            {
+                return selectAssetCommand ??
+                    (selectAssetCommand = new RelayCommand(o => { 
+                        Markets = GetMarketsByAsset((string)o).Result;
+                        Exchanges = GetExchanges().Result;
+                    }));
+            }
+        }
+
         public Asset SelectedAsset
         {
             get { return selectedAsset; }
@@ -36,12 +82,47 @@ namespace TestDCT.ViewModels
             }
         }
 
-        public AssetViewModel()
+        public Exchange SelectedExchange
         {
-            LoadAssets();
+            get 
+            { 
+                return selectedExchange; 
+            }
+            set
+            {
+                selectedExchange = value;
+                OnPropertyChanged("SelectedExchange");
+            }
         }
 
-        public IEnumerable<Asset> Assets { 
+        public IEnumerable<Market> Markets
+        {
+            get
+            {
+                return markets;
+            }
+            set
+            {
+                markets = value;
+                OnPropertyChanged("Markets");
+            }
+        }
+
+        public IEnumerable<Exchange> Exchanges
+        {
+            get
+            {
+                return exchanges;
+            }
+            set
+            {
+                exchanges = value;
+                OnPropertyChanged("Exchanges");
+            }
+        }
+
+        public IEnumerable<Asset> Assets 
+        { 
             get
             {
                 return assets;
@@ -54,28 +135,48 @@ namespace TestDCT.ViewModels
         }
 
 
+
         public async Task LoadAssets()
         {
             Assets = await GetTop10Assets();
         }
 
+        public async Task<Exchange> GetExchangeById(string id)
+        {
+            selectedExchange = await ("exchanges/" + id).SendRequestSipleData<Exchange>();
+            return selectedExchange;
+        }
+
+        public async Task<IEnumerable<Market>> GetMarketsByAsset(string id)
+        {
+            markets = await ("markets?baseId=" + id).SendRequest<Market>();
+            return markets;
+        }
+
+        public async Task<IEnumerable<Exchange>> GetExchanges()
+        {
+            exchanges = await ("exchanges").SendRequest<Exchange>();
+            return exchanges;
+        }
+
         public async Task<IEnumerable<Asset>> GetTop10Assets()
         {
-            HttpClient client = new HttpClient { BaseAddress = new Uri(path) };
-            var json = await client.GetAsync("?limit=10");
-            JsonSerializer serializer = JsonSerializer.CreateDefault();
-            var fromJson = await json.Content.ReadAsStringAsync();
-           // assets = JsonConvert.DeserializeObject<List<Asset>>(fromJson);
-            using (StringReader reader = new StringReader(fromJson))
-            { 
-                using (JsonTextReader jsonReader = new JsonTextReader(reader))
-                {                   
-                    assets = serializer.Deserialize(jsonReader).ToModelList();
-                }
-            }              
+            assets = await "assets?limit=10".SendRequest<Asset>();       
             return assets;
         }
 
+
+        public async Task<IEnumerable<Asset>> SearchAssets(string key)
+        {
+
+            assets = await ("assets?search=" + key).SendRequest<Asset>();
+            return assets;
+        }
+
+        public async Task GetHistory(string id)
+        {
+
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

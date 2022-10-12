@@ -1,0 +1,84 @@
+﻿<Page x:Class="TestDCT.DetailInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestDCT"
+      xmlns:viewModel="clr-namespace:TestDCT.ViewModels"
+      xmlns:chart="http://schemas.stocksharp.com/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DetailInfoPage">
+
+    <Canvas Name="canvasBackInfo" Margin="0,0,0,10">
+
+
+        <Canvas.Resources>
+            <DrawingBrush 
+                    x:Key="BackBrush"
+                    Viewport="0,0,10,10" 
+                    ViewportUnits="Absolute"
+                    TileMode="Tile">
+                <DrawingBrush.Drawing>
+                    <DrawingGroup>
+                        <GeometryDrawing Geometry="M0,0 L1,0 1,0.1, 0,0.1Z" Brush="#EEEEEE" />
+                        <GeometryDrawing Geometry="M0,0 L0,1 0.1,1, 0.1,0Z" Brush="#EEEEEE" />
+                    </DrawingGroup>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
+
+        </Canvas.Resources>
+
+
+        <ListView Name="assetsList" Height="350" Canvas.Left="10" Canvas.Top="70" Width="241"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonUp="assetsList_MouseLeftButtonUp">
+            <ListView.DataContext>
+                <viewModel:AssetViewModel/>
+            </ListView.DataContext>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="auto" Header="Symbol" DisplayMemberBinding="{Binding symbol}"/>
+                    <GridViewColumn Width="auto" Header="Asset name" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Width="35" Header="Rank" DisplayMemberBinding="{Binding rank}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="textBox" Height="23" Canvas.Left="12" TextWrapping="Wrap" Text="" 
+                 Canvas.Top="26" Width="190" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button x:Name="searchButton" Content="Search" Height="23" Canvas.Left="207" 
+                Canvas.Top="26" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"
+                Click="searchButton_Click"/>
+
+        <Border
+                BorderThickness="1"
+                BorderBrush="Gray"
+                Grid.Row="1"
+                Grid.Column="1" Height="175" Width="502" Canvas.Left="289" Canvas.Top="245" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <!-- and finally the drawing area -->
+
+
+
+            <Canvas                                     
+                    Background="{StaticResource BackBrush}"
+                    
+                    Name="drawCanvas" Margin="-1,0,0,-1"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Height="199"
+                Canvas.Left="289" Canvas.Top="26" Width="501" 
+                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="labelPrice" Content="Price USD: " Canvas.Left="307" Canvas.Top="38"/>
+        <Label x:Name="labelVolume" Content="Volume USD 24 h: " Canvas.Left="307" Canvas.Top="64"/>
+        <Label x:Name="labelChange" Content="Change in  percent in 24 h: " Canvas.Left="307" Canvas.Top="90"/>
+        <Button x:Name="buttonLink" Content="Open in Market" Canvas.Left="307" Canvas.Top="189" RenderTransformOrigin="0.48,0.518" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="97" Click="buttonLink_Click"/>
+        <TextBox x:Name="textBoxPrice" Canvas.Left="474" TextWrapping="Wrap" Text="" Canvas.Top="42" Width="304" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="textBoxVolume" Canvas.Left="474" TextWrapping="Wrap" Text="" Canvas.Top="68" Width="304" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="textBoxChange" Canvas.Left="474" TextWrapping="Wrap" Text="" Canvas.Top="94" Width="304" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label x:Name="labelMarkets" Content="Markets: " Canvas.Left="307" Canvas.Top="116" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" Canvas.Left="474" Canvas.Top="120" Width="304"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  MouseLeftButtonDown="comboBox_MouseLeftButtonDown" DataContextChanged="comboBox_DataContextChanged"
+                  SelectionChanged="comboBox_SelectionChanged"/>
+    </Canvas>
+
+
+</Page>
