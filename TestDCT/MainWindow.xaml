@@ -14,7 +14,9 @@
             <TabItem Header="Info">
                 <Frame x:Name="frame2" Source="DetailInfoPage.xaml" Margin="0,0,0,1"/>
             </TabItem>
-
+            <TabItem Header="Converter">
+                <Frame x:Name="frame3" Source="ConverterPage.xaml" Margin="0,0,0,1"/>
+            </TabItem>
         </TabControl>
     </Canvas>
 

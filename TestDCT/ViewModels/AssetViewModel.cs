@@ -29,6 +29,8 @@ namespace TestDCT.ViewModels
         private IEnumerable<Market> markets;
         private IEnumerable<Exchange> exchanges;
         private Exchange selectedExchange;
+        private IEnumerable<AssetHistory> assetHistories;
+
 
 
         private RelayCommand selectMarketCommand;
@@ -71,6 +73,8 @@ namespace TestDCT.ViewModels
                     }));
             }
         }
+
+        
 
         public Asset SelectedAsset
         {
@@ -134,7 +138,18 @@ namespace TestDCT.ViewModels
             }
         }
 
-
+        public IEnumerable<AssetHistory> AssetHistories
+        {
+            get
+            {
+                return assetHistories;
+            }
+            set
+            {
+                assetHistories = value;
+                OnPropertyChanged("AssetHistories");
+            }
+        }
 
         public async Task LoadAssets()
         {
@@ -165,6 +180,12 @@ namespace TestDCT.ViewModels
             return assets;
         }
 
+        public async Task<IEnumerable<Asset>> GetTopNAssets(int limit)
+        {
+            assets = await ("assets?limit="+limit.ToString()).SendRequest<Asset>();
+            return assets;
+        }
+
 
         public async Task<IEnumerable<Asset>> SearchAssets(string key)
         {
@@ -173,9 +194,10 @@ namespace TestDCT.ViewModels
             return assets;
         }
 
-        public async Task GetHistory(string id)
+        public async Task<IEnumerable<AssetHistory>> GetHistory(string id, string interval)
         {
-
+            assetHistories = await $"assets/{id}/history?interval={interval}".SendRequest<AssetHistory>();
+            return assetHistories; ;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -9,20 +9,36 @@
       Title="MainPage" Height="326"
       >
 
+    <Canvas Margin="0,0,0,-93">
+        <ListView Name="assetsList" ItemsSource="{Binding Assets}" Canvas.Left="10" Canvas.Top="65" Width="291" HorizontalAlignment="Center" Height="241" VerticalAlignment="Top">
+            <ListView.DataContext>
+                <viewModel:AssetViewModel/>
+            </ListView.DataContext>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="auto" Header="Price USD" DisplayMemberBinding="{Binding priceUsd}"/>
+                    <GridViewColumn Width="auto" Header="Asset name" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Width="35" Header="Rank" DisplayMemberBinding="{Binding rank}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Slider x:Name="slider" Canvas.Left="478" Canvas.Top="29" Width="291" HorizontalAlignment="Left" VerticalAlignment="Center" Minimum="1" Maximum="100" TickPlacement="BottomRight" Cursor="Arrow" AutoToolTipPlacement="BottomRight"/>
+        <ListView x:Name="assetsListTopN" Canvas.Left="478" Canvas.Top="65" Width="291" HorizontalAlignment="Left" VerticalAlignment="Center" Height="251">
+            <ListView.DataContext>
+                <viewModel:AssetViewModel/>
+            </ListView.DataContext>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="auto" Header="Price USD" DisplayMemberBinding="{Binding priceUsd}"/>
+                    <GridViewColumn Width="auto" Header="Asset name" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Width="35" Header="Rank" DisplayMemberBinding="{Binding rank}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="label" Content="Top 10 currencies returned by API: "
+               Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Select" Height="24" Canvas.Left="697" Canvas.Top="321" Width="72" HorizontalAlignment="Left" VerticalAlignment="Center" Click="button_Click"/>
 
-    <ListView Margin="10,65,437,23" Name="assetsList" ItemsSource="{Binding Assets}">
-        <ListView.DataContext>
-            <viewModel:AssetViewModel/>
-        </ListView.DataContext>
-        <ListView.View>
-            <GridView>
-                <GridViewColumn Width="auto" Header="Price USD" DisplayMemberBinding="{Binding priceUsd}"/>
-                <GridViewColumn Width="auto" Header="Asset name" DisplayMemberBinding="{Binding name}"/>
-                <GridViewColumn Width="35" Header="Rank" DisplayMemberBinding="{Binding rank}"/>
-            </GridView>
-        </ListView.View>
-    </ListView>
-
-
+    </Canvas>
 
 </Page>

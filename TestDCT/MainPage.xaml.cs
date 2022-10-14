@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Windows.Themes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,10 +22,19 @@ namespace TestDCT
     /// </summary>
     public partial class MainPage : Page
     {
+        AssetViewModel assetViewModel;
         public MainPage()
         {
-            InitializeComponent();           
+            
+            InitializeComponent();
+            
         }
-        
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            int n = Convert.ToInt32(slider.Value);
+            assetViewModel = new AssetViewModel();
+            assetsListTopN.ItemsSource = assetViewModel.GetTopNAssets(n).Result;
+        }
     }
 }

@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TestDCT"
       xmlns:viewModel="clr-namespace:TestDCT.ViewModels"
-      xmlns:chart="http://schemas.stocksharp.com/xaml"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DetailInfoPage">
 
     <Canvas Name="canvasBackInfo" Margin="0,0,0,10">
 
+        
 
         <Canvas.Resources>
             <DrawingBrush 
@@ -26,9 +27,9 @@
                     </DrawingGroup>
                 </DrawingBrush.Drawing>
             </DrawingBrush>
-
+            
         </Canvas.Resources>
-
+        
 
         <ListView Name="assetsList" Height="350" Canvas.Left="10" Canvas.Top="70" Width="241"
                   HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonUp="assetsList_MouseLeftButtonUp">
@@ -59,7 +60,7 @@
 
 
             <Canvas                                     
-                    Background="{StaticResource BackBrush}"
+                    
                     
                     Name="drawCanvas" Margin="-1,0,0,-1"/>
         </Border>
@@ -75,9 +76,9 @@
         <TextBox x:Name="textBoxChange" Canvas.Left="474" TextWrapping="Wrap" Text="" Canvas.Top="94" Width="304" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label x:Name="labelMarkets" Content="Markets: " Canvas.Left="307" Canvas.Top="116" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBox" Canvas.Left="474" Canvas.Top="120" Width="304"
-                  HorizontalAlignment="Center" VerticalAlignment="Center"
-                  MouseLeftButtonDown="comboBox_MouseLeftButtonDown" DataContextChanged="comboBox_DataContextChanged"
-                  SelectionChanged="comboBox_SelectionChanged"/>
+                  HorizontalAlignment="Center" VerticalAlignment="Center"                  
+                  SelectionChanged="comboBox_SelectionChanged"
+                  Text="Select market"/>
     </Canvas>
 
 

@@ -26,3 +26,5 @@ D:\work\TestDCT\TestDCT\obj\Debug\net6.0-windows\refint\TestDCT.dll
 D:\work\TestDCT\TestDCT\obj\Debug\net6.0-windows\TestDCT.pdb
 D:\work\TestDCT\TestDCT\obj\Debug\net6.0-windows\TestDCT.genruntimeconfig.cache
 D:\work\TestDCT\TestDCT\obj\Debug\net6.0-windows\ref\TestDCT.dll
+D:\work\TestDCT\TestDCT\obj\Debug\net6.0-windows\ConverterPage.g.cs
+D:\work\TestDCT\TestDCT\obj\Debug\net6.0-windows\ConverterPage.baml
