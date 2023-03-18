@@ -12,25 +12,6 @@
 
     <Canvas Name="canvasBackInfo" Margin="0,0,0,10">
 
-        
-
-        <Canvas.Resources>
-            <DrawingBrush 
-                    x:Key="BackBrush"
-                    Viewport="0,0,10,10" 
-                    ViewportUnits="Absolute"
-                    TileMode="Tile">
-                <DrawingBrush.Drawing>
-                    <DrawingGroup>
-                        <GeometryDrawing Geometry="M0,0 L1,0 1,0.1, 0,0.1Z" Brush="#EEEEEE" />
-                        <GeometryDrawing Geometry="M0,0 L0,1 0.1,1, 0.1,0Z" Brush="#EEEEEE" />
-                    </DrawingGroup>
-                </DrawingBrush.Drawing>
-            </DrawingBrush>
-            
-        </Canvas.Resources>
-        
-
         <ListView Name="assetsList" Height="350" Canvas.Left="10" Canvas.Top="70" Width="241"
                   HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonUp="assetsList_MouseLeftButtonUp">
             <ListView.DataContext>
@@ -50,20 +31,7 @@
                 Canvas.Top="26" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"
                 Click="searchButton_Click"/>
 
-        <Border
-                BorderThickness="1"
-                BorderBrush="Gray"
-                Grid.Row="1"
-                Grid.Column="1" Height="175" Width="502" Canvas.Left="289" Canvas.Top="245" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <!-- and finally the drawing area -->
 
-
-
-            <Canvas                                     
-                    
-                    
-                    Name="drawCanvas" Margin="-1,0,0,-1"/>
-        </Border>
         <Border BorderBrush="Black" BorderThickness="1" Height="199"
                 Canvas.Left="289" Canvas.Top="26" Width="501" 
                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -79,6 +47,19 @@
                   HorizontalAlignment="Center" VerticalAlignment="Center"                  
                   SelectionChanged="comboBox_SelectionChanged"
                   Text="Select market"/>
+        <ListView x:Name="assetsList_Copy" Height="175" Canvas.Left="548" Canvas.Top="245" Width="242"
+            MouseLeftButtonUp="assetsList_MouseLeftButtonUp" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <ListView.DataContext>
+                <viewModel:AssetViewModel/>
+            </ListView.DataContext>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="121" Header="Price" DisplayMemberBinding="{Binding priseUsd}"/>
+                    <GridViewColumn Width="121" Header="Date" DisplayMemberBinding="{Binding date}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ComboBox x:Name="comboBoxInteval" Canvas.Left="400" Canvas.Top="246" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 
 
